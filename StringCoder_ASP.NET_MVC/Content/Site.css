@@ -17,8 +17,72 @@
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
 textarea {
-    max-width: 280px;
+    /*max-width: 500px;*/
+    width: 450px;
+    height: 100px;
+    /*float: left;*/
+}
+
+#buttonEncode {
+    display: block;
+    width: 60px;
+    height: 32px;
+    padding: 0px;
+    /*float: right;*/
+    top: -356px;
+    margin-left: 460px;
+    position: relative;
+    /*margin-bottom: 17px;*/
+    /*top: -350px;                      THIS      */   
+    /*left:0px;
+    right: 0px;
+    margin: 0 0 0 auto;*/
+}
+#buttonDecode {
+    display: block;
+    width: 60px;
+    height: 32px;
+    padding: 0px;
+    margin-top: 95px;
+    margin-left: 460px;
+    position: relative;
+    top: -357px;
+}
+#dropdownlistCipher {
+    margin-left: 560px;
+    display: block;
+    padding: 0px;
+    /*margin-top: -170px;*/
+    position: relative;
+    top: -350px;
+}
+#labelCipher {
+    margin-left: 560px;
+    display: block;
+    padding: 0px;
+    margin-top: -171px;
+    position: relative;
+    top: -340px;
+    margin-bottom: 12px;
+}
+#labelKey {
+    margin-left: 560px;
+    display: block;
+    padding: 0px;
+    /*margin-top: -171px;*/
+    position: relative;
+    top: -340px;
+    margin-bottom: 2px;
+    width: 128px;
+}
+#tbkey {
+    margin-left: 560px;
+    display: block;
+    padding: 0px;
+    /*margin-top: -171px;*/
+    position: relative;
+    top: -340px;
+    margin-bottom: 17px;
+    width: 128px;
 }
