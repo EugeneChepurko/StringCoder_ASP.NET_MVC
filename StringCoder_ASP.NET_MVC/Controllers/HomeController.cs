@@ -22,11 +22,13 @@ namespace StringCoder_ASP.NET_MVC.Controllers
         [HttpPost]
         public ActionResult EncodeText(FormData formData, FormCollection form)
         {
+            SelectList items = new SelectList(ciphers);
+            ViewBag.Ciphers = items;
             // Caesar cipher encode
             if (Request.Form["Ciphers"] == "Caesar cipher" && formData.tbkey != "")
             {
-                Request.Form["Your decoded text:"] = "  Your decoded text:";
-                Request.Form["Decode"] = "Decode";
+                //Request.Form["Your decoded text:"] = "  Your decoded text:";
+                //Request.Form["Decode"] = "Decode";
                 key = Convert.ToInt32(formData.tbkey);
                 if (formData.EncodedText != "")
                 {
@@ -65,6 +67,8 @@ namespace StringCoder_ASP.NET_MVC.Controllers
         [HttpPost]
         public ActionResult DecodeText(FormData formData, FormCollection form)
         {
+            SelectList items = new SelectList(ciphers);
+            ViewBag.Ciphers = items;
             // Caesar cipher decode
             if (Request.Form["Ciphers"] == "Caesar cipher")
             {
@@ -103,6 +107,7 @@ namespace StringCoder_ASP.NET_MVC.Controllers
             }
             return View(formData);
         }
+        [HttpGet]
         public ActionResult Index()
         {
             SelectList items = new SelectList(ciphers);

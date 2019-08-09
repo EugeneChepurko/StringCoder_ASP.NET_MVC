@@ -16,7 +16,6 @@
     white-space: normal;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
 textarea {
     /*max-width: 500px;*/
     width: 450px;
@@ -31,13 +30,16 @@ textarea {
     padding: 0px;
     /*float: right;*/
     top: -356px;
-    margin-left: 460px;
-    position: relative;
+    /*margin-left: 460px;               this
+    position: relative;                 this*/
     /*margin-bottom: 17px;*/
-    /*top: -350px;                      THIS      */   
+    /*top: -350px;                      THIS      */
     /*left:0px;
     right: 0px;
     margin: 0 0 0 auto;*/
+    margin-left: 460px;
+    position: relative;
+    top: -350px;
 }
 #buttonDecode {
     display: block;

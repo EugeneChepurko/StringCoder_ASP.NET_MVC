@@ -1,7 +1,7 @@
 ﻿@model StringCoder_ASP.NET_MVC.Models.FormData
 @using StringCoder_ASP.NET_MVC.Controllers
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "DecodeText";
 }
 <div>
     <div>
@@ -10,7 +10,7 @@
             @Html.Label("Input your text:") <br />
             @Html.TextArea("YourText") <br />
             @Html.Label("Your encoded text:") <br />
-            @Html.TextAreaFor(e => e.EncodedText, ViewBag.EncText as string) <br />
+            @Html.TextAreaFor(e => e.EncodedText@*(string)ViewBag.EncText*@) <br />
             @Html.Label("Your decoded text:") <br />
             @Html.TextAreaFor(d => d.DecodedText) <br />
             <div id="buttonEncode">
@@ -26,3 +26,4 @@
         }
     </div>
 </div>
+
