@@ -18,7 +18,51 @@ namespace StringCoder_ASP.NET_MVC.Controllers
         string prev = null;
 
         private static List<string> ciphers = new List<string>() { "Caesar cipher", "Vigenere cipher", "HashFunc" };
+        [HttpGet]
+        public ActionResult EncodeText(FormData formData)
+        {
+            SelectList items = new SelectList(ciphers);
+            ViewBag.Ciphers = items;
+            // Caesar cipher encode
+            if (Request.Form["Ciphers"] == "Caesar cipher" && formData.tbkey != "")
+            {
+                //Request.Form["Your decoded text:"] = "  Your decoded text:";
+                //Request.Form["Decode"] = "Decode";
+                key = Convert.ToInt32(formData.tbkey);
+                if (formData.EncodedText != "")
+                {
+                    formData.EncodedText = "";
+                }
+                try
+                {
+                    foreach (var item in charsToRemove)
+                    {
+                        formData.YourText = formData.YourText.Replace(item, string.Empty);
+                    }
 
+                    char[] text = formData.YourText.ToCharArray().Where(s => !char.IsWhiteSpace(s)).ToArray();
+
+                    for (int i = 0; i < text.Length; i++)
+                    {
+                        for (int j = 0; j <= alphabet.Length && j <= alphabetUpper.Length; j++)
+                        {
+                            if (text[i].ToString() == alphabet[j].ToString() || text[i].ToString() == alphabetUpper[j].ToString())
+                            {
+                                char.ToLower(text[i]);
+
+                                formData.EncodedText += Convert.ToChar(alphabet[(j + key) % alphabet.Length]);
+                                break;
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Exception = ex.Message;
+                }
+            }
+            return View(formData);
+        }
         [HttpPost]
         public ActionResult EncodeText(FormData formData, FormCollection form)
         {
@@ -64,6 +108,51 @@ namespace StringCoder_ASP.NET_MVC.Controllers
             }
             return View(formData);
         }
+
+        [HttpGet]
+        public ActionResult DecodeText(FormData formData)
+        {
+            SelectList items = new SelectList(ciphers);
+            ViewBag.Ciphers = items;
+            // Caesar cipher decode
+            if (Request.Form["Ciphers"] == "Caesar cipher")
+            {
+                if (formData.DecodedText != "")
+                {
+                    formData.DecodedText = "";
+                }
+                try
+                {
+                    int temp = 0;
+                    char[] text = formData.EncodedText.ToCharArray();
+                    for (int i = 0; i < text.Length; i++)
+                    {
+                        for (int j = 0; j <= alphabet.Length; j++)
+                        {
+                            if (text[i].ToString() == alphabet[j].ToString())
+                            {
+                                temp = j - key;
+
+                                if (temp < 0)
+                                    temp += alphabet.Length;
+                                if (temp >= alphabet.Length)
+                                    temp -= alphabet.Length;
+
+                                formData.DecodedText += alphabet[temp];
+                                break;
+                            }
+                            continue;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Exception = ex.Message;
+                }
+            }
+            return View(formData);
+        }
+
         [HttpPost]
         public ActionResult DecodeText(FormData formData, FormCollection form)
         {
@@ -114,53 +203,53 @@ namespace StringCoder_ASP.NET_MVC.Controllers
             ViewBag.Ciphers = items;
             return View();
         }
-        [HttpPost]
-        public ActionResult Index(FormData formData, FormCollection formCollection)
-        {
-            SelectList items = new SelectList(ciphers);
-            ViewBag.Ciphers = items;
+        //[HttpPost]
+        //public ActionResult Index(FormData formData, FormCollection formCollection)
+        //{
+        //    SelectList items = new SelectList(ciphers);
+        //    ViewBag.Ciphers = items;
 
-            // Caesar cipher encode
-            if (Request.Form["Ciphers"] == "Caesar cipher" && formData.tbkey != "")
-            {
-                //Request.Form["Your decoded text:"] = "  Your decoded text:";
-                //Request.Form["Decode"] = "Decode";
-                key = Convert.ToInt32(formData.tbkey);
-                if (formData.EncodedText != "")
-                {
-                    formData.EncodedText = "";
-                }
-                try
-                {
-                    foreach (var item in charsToRemove)
-                    {
-                        formData.YourText = formData.YourText.Replace(item, string.Empty);
-                    }
+        //    // Caesar cipher encode
+        //    if (Request.Form["Ciphers"] == "Caesar cipher" && formData.tbkey != "")
+        //    {
+        //        //Request.Form["Your decoded text:"] = "  Your decoded text:";
+        //        //Request.Form["Decode"] = "Decode";
+        //        key = Convert.ToInt32(formData.tbkey);
+        //        if (formData.EncodedText != "")
+        //        {
+        //            formData.EncodedText = "";
+        //        }
+        //        try
+        //        {
+        //            foreach (var item in charsToRemove)
+        //            {
+        //                formData.YourText = formData.YourText.Replace(item, string.Empty);
+        //            }
 
-                    char[] text = formData.YourText.ToCharArray().Where(s => !char.IsWhiteSpace(s)).ToArray();
+        //            char[] text = formData.YourText.ToCharArray().Where(s => !char.IsWhiteSpace(s)).ToArray();
 
-                    for (int i = 0; i < text.Length; i++)
-                    {
-                        for (int j = 0; j <= alphabet.Length && j <= alphabetUpper.Length; j++)
-                        {
-                            if (text[i].ToString() == alphabet[j].ToString() || text[i].ToString() == alphabetUpper[j].ToString())
-                            {
-                                char.ToLower(text[i]);
+        //            for (int i = 0; i < text.Length; i++)
+        //            {
+        //                for (int j = 0; j <= alphabet.Length && j <= alphabetUpper.Length; j++)
+        //                {
+        //                    if (text[i].ToString() == alphabet[j].ToString() || text[i].ToString() == alphabetUpper[j].ToString())
+        //                    {
+        //                        char.ToLower(text[i]);
 
-                                formData.EncodedText += Convert.ToChar(alphabet[(j + key) % alphabet.Length]);
-                                ViewBag.EncText = formData.EncodedText;
-                                break;
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    ViewBag.Exception = ex.Message;
-                }
-            }
-            return View(formData);
-        }
+        //                        formData.EncodedText += Convert.ToChar(alphabet[(j + key) % alphabet.Length]);
+        //                        ViewBag.EncText = formData.EncodedText;
+        //                        break;
+        //                    }
+        //                }
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            ViewBag.Exception = ex.Message;
+        //        }
+        //    }
+        //    return View(formData);
+        //}
 
         public ActionResult About()
         {
