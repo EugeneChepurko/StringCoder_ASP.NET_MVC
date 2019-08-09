@@ -5,14 +5,14 @@
 }
 <div>
     <div>
-        @using (Html.BeginForm("EncodeText", "Home", FormMethod.Get))
+        @using (Html.BeginForm("EncodeText", "Home", FormMethod.Post))
         {
             @Html.Label("Input your text:") <br />
             @Html.TextArea("YourText") <br />
             @Html.Label("Your encoded text:") <br />
-            @Html.TextAreaFor(e => e.EncodedText@*(string)ViewBag.EncText*@) <br />
+            <textarea id="EncodedText" name="EncodedText">@Model.EncodedText</textarea> @*@Html.TextArea("EncodedText", Model.EncodedText as string)*@  <br />
             @Html.Label("Your decoded text:") <br />
-            @Html.TextAreaFor(d => d.DecodedText) <br />
+            <textarea id="DecodedText" name="DecodedText">@Model.DecodedText</textarea> @*@Html.TextAreaFor(d => d.DecodedText)*@ <br />
             <div id="buttonEncode">
                 <input id="button" type="submit" value="Encode" formaction="@Url.Action("EncodeText", "Home")" /> <br />
             </div>

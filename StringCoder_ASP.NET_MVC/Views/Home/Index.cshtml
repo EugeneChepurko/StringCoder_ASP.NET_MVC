@@ -10,7 +10,7 @@
             @Html.Label("Input your text:") <br />
             @Html.TextArea("YourText") <br />
             @Html.Label("Your encoded text:") <br />
-            @Html.TextAreaFor(e => e.EncodedText, ViewBag.EncText as string) <br />
+            @Html.TextArea("EncodedText"@*, ViewBag.EncText as string*@) <br />
             @Html.Label("Your decoded text:") <br />
             @Html.TextAreaFor(d => d.DecodedText) <br />
             <div id="buttonEncode">
