@@ -1,8 +1,11 @@
 ﻿body {
+    background-image: url(../pict/piccipher.jpg);
     padding-top: 50px;
     padding-bottom: 20px;
 }
-
+li {
+    font: bold 17px serif;
+}
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -17,11 +20,15 @@
 }
 
 textarea {
-    /*max-width: 500px;*/
     width: 450px;
     height: 100px;
-    /*float: left;*/
+    border-radius: 3px;
+    transition: 2.0s all;
 }
+
+    textarea:hover {
+        background-color: #c8c8c8;
+    }
 
 #buttonEncode {
     display: block;
@@ -51,14 +58,7 @@ textarea {
     position: relative;
     top: -357px;
 }
-#dropdownlistCipher {
-    margin-left: 560px;
-    display: block;
-    padding: 0px;
-    /*margin-top: -170px;*/
-    position: relative;
-    top: -350px;
-}
+
 #labelCipher {
     margin-left: 560px;
     display: block;
@@ -87,4 +87,24 @@ textarea {
     top: -340px;
     margin-bottom: 17px;
     width: 128px;
+}
+
+input {
+    /*max-width: 280px;*/
+    border-radius: 3px;
+    transition: 2.0s all;
+}
+
+    input:hover {
+        background-color: #c8c8c8;
+    }
+
+#drop {
+    margin-left: 560px;
+    position: relative;
+    top: -350px;
+    padding: 5px 10px;
+    border-radius: 5px 12px;
+    background-color: #e0e0e0;
+    font-weight: bold;
 }

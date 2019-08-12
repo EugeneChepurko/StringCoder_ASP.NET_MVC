@@ -1,7 +1,7 @@
 ﻿@model StringCoder_ASP.NET_MVC.Models.FormData
 @using StringCoder_ASP.NET_MVC.Controllers
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Main Page";
 }
 <div>
     <div>
@@ -17,10 +17,10 @@
                 <input id="button" type="submit" value="Encode" formaction="@Url.Action("EncodeText", "Home")" /> <br />
             </div>
             <div id="buttonDecode">
-                <input id="button" type="submit" value="Decode" formaction="@Url.Action("DecodeText", "Home")" /> <br />
+                <input id="button" type="submit" name="Decode" value="Decode" formaction="@Url.Action("DecodeText", "Home")" /> <br />
             </div>
             <div>@Html.Label("Select a cipher:", null, new { @id = "labelCipher" })</div>
-            <div>@Html.DropDownList("Ciphers", ViewBag.Ciphers as SelectList, null, new { @id = "dropdownlistCipher" })</div>
+            <div>@Html.DropDownList("Ciphers", ViewBag.Ciphers as SelectList, "Select a cipher", new { @id = "drop" })</div>
             <div>@Html.Label("Enter a key:", null, new { @id = "labelKey" })</div>
             <div>@Html.TextBox("tbkey", null, new { @id = "tbkey" })</div>
         }

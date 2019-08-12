@@ -20,7 +20,7 @@
                 <input id="button" type="submit" value="Decode" formaction="@Url.Action("DecodeText", "Home")" /> <br />
             </div>
             <div>@Html.Label("Select a cipher:", null, new { @id = "labelCipher" })</div>
-            <div>@Html.DropDownList("Ciphers", ViewBag.Ciphers as SelectList, null, new { @id = "dropdownlistCipher" })</div>
+            <div>@Html.DropDownList("Ciphers", ViewBag.Ciphers as SelectList, null, new { @id = "drop" })</div>
             <div>@Html.Label("Enter a key:", null, new { @id = "labelKey" })</div>
             <div>@Html.TextBox("tbkey", null, new { @id = "tbkey" })</div>
         }

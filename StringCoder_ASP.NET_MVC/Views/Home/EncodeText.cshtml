@@ -10,17 +10,17 @@
             @Html.Label("Input your text:") <br />
             @Html.TextArea("YourText") <br />
             @Html.Label("Your encoded text:") <br />
-            <textarea id="EncodedText" name="EncodedText">@Model.EncodedText</textarea> @*@Html.TextArea("EncodedText", Model.EncodedText as string)*@  <br />
+            <textarea id="EncodedText" name="EncodedText">@Model.EncodedText</textarea> @*@Html.TextArea("EncodedText", Model.EncodedText as string)*@ <br />
             @Html.Label("Your decoded text:") <br />
             <textarea id="DecodedText" name="DecodedText">@Model.DecodedText</textarea> @*@Html.TextAreaFor(d => d.DecodedText)*@ <br />
             <div id="buttonEncode">
-                <input id="button" type="submit" value="Encode" formaction="@Url.Action("EncodeText", "Home")" /> <br />
+                <input id="button" type="submit"  value="Encode" formaction="@Url.Action("EncodeText", "Home")" /> <br />
             </div>
             <div id="buttonDecode">
-                <input id="button" type="submit" value="Decode" formaction="@Url.Action("DecodeText", "Home")" /> <br />
+                <input id="button" type="submit" name="Decode" value="Decode" formaction="@Url.Action("DecodeText", "Home")" /> <br />
             </div>
             <div>@Html.Label("Select a cipher:", null, new { @id = "labelCipher" })</div>
-            <div>@Html.DropDownList("Ciphers", ViewBag.Ciphers as SelectList, null, new { @id = "dropdownlistCipher" })</div>
+            <div>@Html.DropDownList("Ciphers", ViewBag.Ciphers as SelectList, null, new { @id = "drop" })</div>
             <div>@Html.Label("Enter a key:", null, new { @id = "labelKey" })</div>
             <div>@Html.TextBox("tbkey", null, new { @id = "tbkey" })</div>
         }
