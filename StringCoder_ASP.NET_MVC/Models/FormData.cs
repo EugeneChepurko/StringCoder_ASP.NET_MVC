@@ -9,7 +9,6 @@ namespace StringCoder_ASP.NET_MVC.Models
         public string DecodedText { get; set; }
         public string tbkey { get; set; }
         public Label lbDecText { get; set; }
-        //public string tbkey { get; set; }
         public Button Decode { get; set; }
         public DropDownList Ciphers { get; set; }
     }

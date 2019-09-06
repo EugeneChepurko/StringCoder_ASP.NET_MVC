@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.UI.WebControls;
 
 namespace StringCoder_ASP.NET_MVC.Controllers
 {
@@ -12,8 +11,8 @@ namespace StringCoder_ASP.NET_MVC.Controllers
     {
         readonly char[] alphabet = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
         readonly char[] alphabetUpper = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
-        readonly string[] charsToRemove = new string[] { ",", ".", ";", ":", "@", "!", "#", "$", "%", "*", "(", ")", "[", "]", "^", "?", "|", "+", "-", "&", @"\", "/", "'", "\"" };
-        private static int key = 0;
+        readonly string[] charsToRemove = new string[] { ",", ".", ";", ":", "@", "!", "#", "$", "%", "*", "(", ")", "[", "]", "^", "?", "|", "+", "-", "&", @"\", "/", "'", "\"", "_", "<", ">", "{", "}" };
+        //private static int key = 0;
         int Xkey, Ytext;
 
         private static List<string> ciphers = new List<string>() { "Caesar cipher", "Vigenere cipher" };
@@ -26,9 +25,6 @@ namespace StringCoder_ASP.NET_MVC.Controllers
             // Caesar cipher encode
             if (Request.Form["Ciphers"] == "Caesar cipher" && formData.tbkey != "")
             {
-                //Request.Form["Your decoded text:"] = "  Your decoded text:";
-                //Request.Form["Decode"] = "Decode";
-                key = Convert.ToInt32(formData.tbkey);
                 if (formData.EncodedText != "")
                 {
                     formData.EncodedText = "";
@@ -41,7 +37,7 @@ namespace StringCoder_ASP.NET_MVC.Controllers
                     }
 
                     char[] text = formData.YourText.ToCharArray().Where(s => !char.IsWhiteSpace(s)).ToArray();
-
+                    
                     for (int i = 0; i < text.Length; i++)
                     {
                         for (int j = 0; j <= alphabet.Length && j <= alphabetUpper.Length; j++)
@@ -50,7 +46,7 @@ namespace StringCoder_ASP.NET_MVC.Controllers
                             {
                                 char.ToLower(text[i]);
 
-                                formData.EncodedText += Convert.ToChar(alphabet[(j + key) % alphabet.Length]);
+                                formData.EncodedText += Convert.ToChar(alphabet[(j + Convert.ToInt32(formData.tbkey)) % alphabet.Length]);
                                 break;
                             }
                         }
@@ -65,8 +61,7 @@ namespace StringCoder_ASP.NET_MVC.Controllers
             //  Vigenere cipher encode
             if (Request.Form["Ciphers"] == "Vigenere cipher")
             {
-                //Request.Form["Your decoded text:"] = "  Your decoded text:";
-                //Request.Form["Decode"] = "Decode";
+
                 if (formData.EncodedText != "")
                 {
                     formData.EncodedText = "";
@@ -106,8 +101,9 @@ namespace StringCoder_ASP.NET_MVC.Controllers
                             k = 0;
                             for (int y = 0; y <= alphabet.Length; y++)
                             {
-                                if (text[t].ToString() == alphabet[y].ToString())
+                                if (text[t].ToString() == alphabet[y].ToString() || text[t].ToString() == alphabetUpper[y].ToString())
                                 {
+                                    char.ToLower(text[t]);
                                     Ytext = y;
                                     for (int x = 0; x <= alphabet.Length; x++)
                                     {
@@ -126,8 +122,9 @@ namespace StringCoder_ASP.NET_MVC.Controllers
                         {
                             for (int y = 0; y <= alphabet.Length; y++)
                             {
-                                if (text[t].ToString() == alphabet[y].ToString())
+                                if (text[t].ToString() == alphabet[y].ToString() || text[t].ToString() == alphabetUpper[y].ToString())
                                 {
+                                    char.ToLower(text[t]);
                                     Ytext = y;
                                     for (int x = 0; x <= alphabet.Length; x++)
                                     {
@@ -176,7 +173,7 @@ namespace StringCoder_ASP.NET_MVC.Controllers
                         {
                             if (text[i].ToString() == alphabet[j].ToString())
                             {
-                                temp = j - key;
+                                temp = j - Convert.ToInt32(formData.tbkey);
 
                                 if (temp < 0)
                                     temp += alphabet.Length;
